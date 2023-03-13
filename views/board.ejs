@@ -56,8 +56,6 @@
       padding: 50px;
     }
 
-    .inner .board_container {}
-
     .inner .board_container .board_header {
       text-align: center;
     }
@@ -149,5 +147,17 @@
       </div>
     </div>
   </div>
+  <script>
+    function deleteArticle (title) {
+      fetch(`http://localhost:4005/board/delete/${title}`, {
+        method: 'delete',
+        headers: {
+          'Content-type': "application/json",
+        }
+      }).then((res) => {
+        location.href = '/board';
+      })
+    }
+  </script>
 </body>
 </html>
