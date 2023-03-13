@@ -2,6 +2,9 @@
 
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+//오류코드 설치
+// const { STATUS_CODES } = require('http');
 
 const app = express();
 const PORT = 4005;
@@ -9,20 +12,33 @@ const PORT = 4005;
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+//바디파서 세팅
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const mainRouter = require('./routes');
 //index는 생략가능
 const usersRouter = require('./routes/users');
 //JS파일 연결
+const boardRouter = require('./routes/board');
 
 app.use('/', mainRouter);
 app.use('/users', usersRouter);
+app.use('/board', boardRouter);
 //user모듈에 /users를 기본으로 깔고 간다.
 
 //라우터 연결 했으므로 생략
 // app.get('/', (req, res) => {
 //   res.send('어서와 Express는 처음이지?');
 // });
+
+//오류코드
+app.use;
+(err, req, res, next) => {
+  console.log(err.stack);
+  res.status(err.statusCode);
+  res.send(err.message + `<a href="/board/write">되돌아가기</a>`);
+};
 
 app.listen(PORT, () => {
   console.log(`서버는 ${PORT}번에서 실행 중 입니다.`);
