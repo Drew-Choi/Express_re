@@ -2,7 +2,6 @@
 
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 //오류코드 설치
 // const { STATUS_CODES } = require('http');
 
@@ -12,9 +11,9 @@ const PORT = 4005;
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
-//바디파서 세팅
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//바디파서 세팅 (항상 라우터 위에 세팅되어야 함)
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const mainRouter = require('./routes');
 //index는 생략가능
@@ -33,12 +32,11 @@ app.use('/board', boardRouter);
 // });
 
 //오류코드
-app.use;
-(err, req, res, next) => {
+app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(err.statusCode);
   res.send(err.message + `<a href="/board/write">되돌아가기</a>`);
-};
+});
 
 app.listen(PORT, () => {
   console.log(`서버는 ${PORT}번에서 실행 중 입니다.`);
