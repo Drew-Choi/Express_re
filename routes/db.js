@@ -1,5 +1,4 @@
 const express = require('express');
-
 const userDB = require('../controllers/userController');
 
 const router = express.Router();
