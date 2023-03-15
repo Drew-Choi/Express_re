@@ -25,9 +25,9 @@ router.get('/write', (req, res) => {
 
 //글 추가 기능
 router.post('/write', (req, res) => {
-  console.log(Object.keys(req.body).length);
-  console.log(req.body.title);
-  console.log(req.body.content);
+  // console.log(Object.keys(req.body).length);
+  // console.log(req.body.title);
+  // console.log(req.body.content);
   if (req.body.title && req.body.content) {
     const newWrite = {
       title: req.body.title,
