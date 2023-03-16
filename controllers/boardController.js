@@ -42,10 +42,13 @@ const boardDB = {
   },
 
   deleteArticle: (id, cb) => {
-    connection.query(`DELETE FROM board WHERE ID_PK = ${id};`, (err, data) => {
-      if (err) throw err;
-      cb(data);
-    });
+    connection.query(
+      `DELETE FROM mydb.board WHERE ID_PK = ${id};`,
+      (err, data) => {
+        if (err) throw err;
+        cb(data);
+      },
+    );
   },
 };
 

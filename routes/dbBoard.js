@@ -73,7 +73,7 @@ router.post('/modify/:id', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
   boardDB.deleteArticle(req.params.id, (data) => {
     if (data.affectedRows >= 1) {
-      res.send(console.log('삭제완료'));
+      res.status(200).send('삭제완료!');
     } else {
       const err = new Error('삭제 오류');
       err.statusCode = 500;

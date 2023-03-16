@@ -157,7 +157,7 @@
           'Content-type': "application/json",
         }
       }).then((res) => {
-        location.href = '/dbBoard';
+        if(res.status === 200) location.reload();
       })
     }
   </script>
