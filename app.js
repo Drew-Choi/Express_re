@@ -2,12 +2,14 @@
 
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 //오류코드 설치
 // const { STATUS_CODES } = require('http');
 
 const app = express();
 const PORT = 4005;
 
+app.use(cookieParser());
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -23,12 +25,14 @@ const usersRouter = require('./routes/users');
 const boardRouter = require('./routes/board');
 const dbRouter = require('./routes/db');
 const dbBoardRouter = require('./routes/dbBoard');
+const cookieRouter = require('./routes/cookie');
 
 app.use('/', mainRouter);
 app.use('/users', usersRouter);
 app.use('/board', boardRouter);
 app.use('/db', dbRouter);
 app.use('/dbBoard', dbBoardRouter);
+app.use('/cookie', cookieRouter);
 //user모듈에 /users를 기본으로 깔고 간다.
 
 //라우터 연결 했으므로 생략

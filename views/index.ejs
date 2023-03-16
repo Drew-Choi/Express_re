@@ -6,12 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>메인 페이지</title>
   <!-- static설정을 하여 /public/이 자동적용됨 생략가능 -->
-  <link rel="stylesheet" href="/CSS/style.css" />
-  <script defer src="/JS/main.js"></script>
  </head>
  <body>
-  <h1>메인 페이지 입니다!</h1>
-  <p><%= msg %></p>
-  <img src="/Images/다운로드.jpeg" alt="강아지" />
+  <h1>Welcom to Tetz Express Service!</h1>
+  <h2><a href="/users">회원 서비스</a></h2>
+  <h2><a href="/dbBoard">게시판 서비스</a></h2>
+  <script>
+    // console.log(document.cookie);
+    // document.cookie = "user=tetz; expires=17 Mar 2023 13:00:00 GMT; path=/;";
+    // document.cookie = "test=kdt; expires=17 Mar 2023 13:00:00 GMT; path=/;";
+    console.log(document.cookie);
+  </script>
  </body>
 </html>
