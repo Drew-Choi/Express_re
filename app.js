@@ -21,11 +21,13 @@ const usersRouter = require('./routes/users');
 //JS파일 연결
 const boardRouter = require('./routes/board');
 const dbRouter = require('./routes/db');
+const dbBoardRouter = require('./routes/dbBoard');
 
 app.use('/', mainRouter);
 app.use('/users', usersRouter);
 app.use('/board', boardRouter);
 app.use('/db', dbRouter);
+app.use('/dbBoard', dbBoardRouter);
 //user모듈에 /users를 기본으로 깔고 간다.
 
 //라우터 연결 했으므로 생략
