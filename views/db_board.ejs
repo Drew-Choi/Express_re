@@ -131,11 +131,13 @@
               <%= ARTICLE[i].TITLE %>
             </div>
             <div class="content">
-              <%= ARTICLE[i].CONTENT %>
+              <p style="word-break: break-all; width: 100%;">
+                <%= ARTICLE[i].CONTENT %>
+              </p>
             </div>
             <div class="foot">
-              <a class="btn orange" href="/dbBoard/modify/<%= ARTICLE[i].title %>">수정</a>
-              <a class="btn blue" href="#" onclick="deleteArticle('<%= ARTICLE[i].title %>')">삭제</a>
+              <a class="btn orange" href="/dbBoard/modify/<%= ARTICLE[i].ID_PK %>">수정</a>
+              <a class="btn blue" href="#" onclick="deleteArticle('<%= ARTICLE[i].ID_PK %>')">삭제</a>
             </div>
           </li>
           <% } %>
@@ -148,14 +150,14 @@
     </div>
   </div>
   <script>
-    function deleteArticle (title) {
-      fetch(`http://localhost:4005/board/delete/${title}`, {
+    function deleteArticle (id) {
+      fetch(`http://localhost:4005/dbBoard/delete/${id}`, {
         method: 'delete',
         headers: {
           'Content-type': "application/json",
         }
       }).then((res) => {
-        location.href = '/board';
+        location.href = '/dbBoard';
       })
     }
   </script>

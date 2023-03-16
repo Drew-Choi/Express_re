@@ -20,7 +20,7 @@ create table boarboardd (
 
 select * from board;
 insert into board (TITLE, CONTENT)
-	values ('최두루', 'aaa@daum.com', '7777', '서울 은평구', 32);
+	values ('제목2', '컨텐츠2입니다.나나나나나나나나나나나나나나나나');
 delete from user where ID_PK = 3;
 update user set AGE = AGE + 1 where ID_PK = 1;
 alter table test_table change column NAME EMAIL VARCHAR(100);
