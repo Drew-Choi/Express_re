@@ -38,6 +38,7 @@ const dbRouter = require('./routes/db');
 const dbBoardRouter = require('./routes/dbBoard');
 const cookieRouter = require('./routes/cookie');
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 app.use('/', mainRouter);
 app.use('/users', usersRouter);
@@ -46,6 +47,7 @@ app.use('/db', dbRouter);
 app.use('/dbBoard', dbBoardRouter);
 app.use('/cookie', cookieRouter);
 app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 //user모듈에 /users를 기본으로 깔고 간다.
 
 //라우터 연결 했으므로 생략
