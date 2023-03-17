@@ -27,7 +27,8 @@ router.get('/', isLogin, (req, res) => {
 
 //글쓰기 페이지 호출 미들웨어
 router.get('/write', isLogin, (req, res) => {
-  res.render('db_board_write');
+  const { userID } = req.session;
+  res.render('db_board_write', { userID });
 });
 
 //글쓰고 데이터베이스로 보내기 미들웨어
