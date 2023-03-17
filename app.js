@@ -10,8 +10,10 @@ const session = require('express-session');
 const app = express();
 const PORT = 4005;
 
+// @ts-ignore
 app.use(cookieParser());
 app.use(
+  // @ts-ignore
   session({
     secret: '1234',
     resave: false,
