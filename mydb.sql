@@ -10,7 +10,7 @@ CREATE TAID_PKBLE user (
   `UPDATE_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table boarboardd (
+create table board (
 `ID_PK` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 `TITLE` VARCHAR(100) NOT NULL,
 `CONTENT` VARCHAR(300) NOT NULL,
@@ -18,13 +18,23 @@ create table boarboardd (
 `UPDATE_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-select * from board;
-insert into board (TITLE, CONTENT)
-	values ('제목2', '컨텐츠2입니다.나나나나나나나나나나나나나나나나');
+select * from user;
+insert into user (USERID, PASSWORD)
+	values ('proro', '2222');
 delete from user where ID_PK = 3;
-update user set AGE = AGE + 1 where ID_PK = 1;
+update user set USERID = AGE + 1 where ID_PK = 2;
 alter table test_table change column NAME EMAIL VARCHAR(100);
 alter table test_table add column ADDRESS VARCHAR(100) AFTER EMAIL;
 alter table test_table drop ADDRESS;
 drop table test_table;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
+
+DROP TABLE user;
+
+create table user (
+`ID_PK` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`USERID` VARCHAR(20) NOT NULL UNIQUE,
+`PASSWORD` VARCHAR(20) NOT NULL,
+`REGISTER_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP,
+`UPDATE_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
