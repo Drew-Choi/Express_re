@@ -1,6 +1,7 @@
 const connection = require('./dbConnect');
 
 const userDB = {
+  //중복회원 찾기
   userCheck: (userID, cb) => {
     connection.query(
       `SELECT * FROM mydb.user WHERE USERID = '${userID}';`,
@@ -11,9 +12,10 @@ const userDB = {
     );
   },
 
-  userRegister: (userID, userPW, cb) => {
+  //중복 아니면 회원 새롭게 등록하기
+  userRegister: (newUser, cb) => {
     connection.query(
-      `INSERT INTO user (USERID, PASSWORD) VALUES ('${userID}', '${userPW}');`,
+      `INSERT INTO mydb.user (USERID, PASSWORD) VALUES ('${newUser.id}', '${newUser.password}');`,
       (err, data) => {
         if (err) throw err;
         cb(data);
