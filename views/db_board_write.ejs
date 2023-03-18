@@ -138,9 +138,9 @@
     <div class="board_container">
       <div class="board_header">
         <h1>글 쓰기</h1>
+        <h4>작성자: <%= userID %></h4>
       </div>
       <form action="/dbBoard/write" method="POST" class="board_form">
-          <input style="all:unset" type="text" name="userID" disabled value="작성자 : <%= userID %>" />
         <div class="form_title">
           <h3>제목</h3>
           <input type="text" name="title" required />

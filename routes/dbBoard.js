@@ -34,8 +34,8 @@ router.get('/write', isLogin, (req, res) => {
 //글쓰고 데이터베이스로 보내기 미들웨어
 router.post('/write', isLogin, (req, res) => {
   if (req.body.title && req.body.content) {
-    boardDB.writeArticle(req.body, (data) => {
-      console.log(data);
+    const { userID } = req.session;
+    boardDB.writeArticle(req.body, userID, (data) => {
       if (data.affectedRows >= 1) {
         res.redirect('/dbBoard');
       } else {
