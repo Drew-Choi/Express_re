@@ -16,11 +16,11 @@ router.post('/', (req, res) => {
         req.session.userID = req.body.id;
 
         // // 로그인 쿠키 발행
-        // res.cookie('user', req.body.id, {
-        //   maxAge: 1000 * 30,
-        //   httpOnly: true,
-        //   signed: true,
-        // });
+        res.cookie('user', req.body.id, {
+          maxAge: 1000 * 30,
+          httpOnly: true,
+          signed: true,
+        });
 
         res.status(200);
         res.redirect('/dbBoard');

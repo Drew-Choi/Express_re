@@ -4,9 +4,8 @@ const boardDB = require('../controllers/boardController');
 const router = express.Router();
 
 //로그인 확인용 미들웨어
-// || req.signedCookies.user
 function isLogin(req, res, next) {
-  if (req.session.login) {
+  if (req.session.login || req.signedCookies.user) {
     next();
   } else {
     res.status(400);

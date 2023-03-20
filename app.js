@@ -4,14 +4,15 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+require('dotenv').config();
 //오류코드 설치
 // const { STATUS_CODES } = require('http');
 
 const app = express();
-const PORT = 4005;
+const { PORT } = process.env;
 
 // @ts-ignore
-app.use(cookieParser());
+app.use(cookieParser('cookieSecret'));
 app.use(
   // @ts-ignore
   session({
