@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.get('/cook', (req, res) => {
   res.cookie('alert', true, {
-    maxAge: 1000 * 5,
+    maxAge: 1000 * 60 * 60,
     // expires: new Date(Date.now() + 1000 * 5),
     // httpOnly: false,
   });

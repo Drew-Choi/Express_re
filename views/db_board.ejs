@@ -141,6 +141,7 @@
               </p>
             </div>
             <div class="foot">
+              <!-- 아래 if문 때문에 로그인 아이디와 일치하는 게시물 수정 삭제를 활성화함 -->
               <% if (ARTICLE[i].USERID === userID) { %>
                 <a class="btn orange" href="/dbBoard/modify/<%= ARTICLE[i].ID_PK %>">수정</a>
                 <a class="btn blue" href="#" onclick="deleteArticle('<%= ARTICLE[i].ID_PK %>')">삭제</a>

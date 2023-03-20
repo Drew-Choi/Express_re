@@ -10,19 +10,20 @@ CREATE TAID_PKBLE user (
   `UPDATE_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-create table board (
+create table shoes (
 `ID_PK` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-`TITLE` VARCHAR(100) NOT NULL,
-`CONTENT` VARCHAR(300) NOT NULL,
+`PD_NAME` VARCHAR(100) NOT NULL,
+`DESCRIBE` VARCHAR(300) NOT NULL,
+`PRICE` VARCHAR(100) NOT NULL,
 `REGISTER_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP,
 `UPDATE_TIME` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-select * from user;
-insert into user (USERID, PASSWORD)
-	values ('proro', '2222');
+select * from shoes;
+insert into shoes (PD_NAME, CONTENT, PRICE)
+	values ('신발1', '편안한 스니커즈', '120,000');
 delete from user where ID_PK = 3;
-update user set USERID = AGE + 1 where ID_PK = 2;
+update user set USERID = pororo where ID_PK = 2;
 alter table test_table change column NAME EMAIL VARCHAR(100);
 alter table test_table add column ADDRESS VARCHAR(100) AFTER EMAIL;
 alter table test_table drop ADDRESS;
