@@ -18,9 +18,11 @@ app.use(
     secret: '1234',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      maxAge: 1000 * 60 * 60,
-    },
+    //아래 쿠키 설정은 브라우저 종료가 되어도 쿠키를 유지해 준다.
+    //그래서 세션을 브라우저 끄면 지우고 싶으면, 아래 옵션은 지워주어야 한다.
+    // cookie: {
+    //   maxAge: 1000 * 60 * 60,
+    // },
   }),
 );
 app.use(cors());
