@@ -28,7 +28,7 @@ async function main() {
     //조건에 맞는 자료 찾아뽑아내기, 배열형태로(toArray)
     const findCursor = test.find({ age: { $gte: 5 } });
     const dataArr = await findCursor.toArray();
-    console.log(dataArr);
+    return dataArr;
   } catch (err) {
     console.error(err);
   }
