@@ -8,27 +8,56 @@ const client = new MongoClient(uri, {
 });
 
 async function main() {
-  //await 뒤는 프로미스 반환될때까지 기다린다
-  await client.connect();
-  //await가 붙은 클라이언트가 해결되면 바로 다음으로 이동
-  const test = client.db('kdt5').collection('test');
+  try {
+    //await 뒤는 프로미스 반환될때까지 기다린다
+    //db클라이언트 연결
+    await client.connect();
+    //await가 붙은 클라이언트가 해결되면 바로 다음으로 이동
+    //db클러스터와 컬렉션에 접근
+    const test = client.db('kdt5').collection('test');
 
-  const deleteManyResult = await test.deleteMany({});
-  if (!deleteManyResult.acknowledged) return '삭제 에러 발생';
+    await test.deleteMany({});
+    await test.insertOne({ name: 'pororo111', age: 5 });
+    await test.insertMany([
+      { name: 'pororo0', age: 5 },
+      { name: 'pororo1', age: 3 },
+      { name: 'pororo2', age: 7 },
+      { name: 'pororo3', age: 1 },
+    ]);
 
-  const inertOneResult = await test.insertOne({ name: 'pororo', age: 5 });
-  if (!inertOneResult.acknowledged) return '데이터 추가 에러';
-
-  const inertManyResult = await test.insertMany([
-    { name: 'pororo0', age: 5 },
-    { name: 'pororo1', age: 6 },
-    { name: 'pororo2', age: 7 },
-    { name: 'pororo3', age: 8 },
-  ]);
-  if (!inertManyResult.acknowledged) return '데이터 추가 에러';
+    //조건에 맞는 자료 찾아뽑아내기, 배열형태로(toArray)
+    const findCursor = test.find({ age: { $gte: 5 } });
+    const dataArr = await findCursor.toArray();
+    console.log(dataArr);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 main();
+
+//try catch 활용
+// async function main() {
+//   try {
+//     //await 뒤는 프로미스 반환될때까지 기다린다
+//     await client.connect();
+//     //await가 붙은 클라이언트가 해결되면 바로 다음으로 이동
+//     const test = client.db('kdt5').collection('test');
+
+//     await test.deleteMany({});
+//     await test.insertOne({ name: 'pororo', age: 5 });
+//     await test.insertMany([
+//       { name: 'pororo0', age: 5 },
+//       { name: 'pororo1', age: 6 },
+//       { name: 'pororo2', age: 7 },
+//       { name: 'pororo3', age: 8 },
+//     ]);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+
+// main();
 
 // client.connect((err) => {
 //   const test = client.db('kdt5').collection('test');
