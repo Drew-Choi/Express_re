@@ -4,6 +4,7 @@ const {
   getAllArticles,
   writeArticle,
   getModifyArticle,
+  updateModifyArticle,
 } = require('../controllers/boardController');
 
 const router = express.Router();
@@ -34,6 +35,9 @@ router.post('/write', isLogin, writeArticle);
 
 //글수정 모드로 이동
 router.get('/modify/:id', isLogin, getModifyArticle);
+
+//수정된 글 업데이트
+router.post('/modify/:id', isLogin, updateModifyArticle);
 
 //레거시
 // router.get('/', isLogin, (req, res) => {

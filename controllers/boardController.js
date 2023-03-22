@@ -60,7 +60,28 @@ const getModifyArticle = async (req, res) => {
   }
 };
 
-module.exports = { getAllArticles, writeArticle, getModifyArticle };
+const updateModifyArticle = async (req, res) => {
+  try {
+    const client = await mongoClient.connect();
+    const board = client.db('kdt5').collection('board');
+
+    await board.updateOne(
+      { _id: ObjectId(req.params.id) },
+      { $set: { TITLE: req.body.title, CONTENT: req.body.content } },
+    );
+    res.redirect('/dbBoard');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.massage + UNEXPECTED_MSG);
+  }
+};
+
+module.exports = {
+  getAllArticles,
+  writeArticle,
+  getModifyArticle,
+  updateModifyArticle,
+};
 
 // const boardDB = {
 //   //모든 게시글 가져오기
