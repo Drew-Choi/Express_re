@@ -5,6 +5,7 @@ const {
   writeArticle,
   getModifyArticle,
   updateModifyArticle,
+  deleteArticle,
 } = require('../controllers/boardController');
 
 const router = express.Router();
@@ -38,6 +39,9 @@ router.get('/modify/:id', isLogin, getModifyArticle);
 
 //수정된 글 업데이트
 router.post('/modify/:id', isLogin, updateModifyArticle);
+
+//글 삭제
+router.delete('/delete/:id', isLogin, deleteArticle);
 
 //레거시
 // router.get('/', isLogin, (req, res) => {

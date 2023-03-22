@@ -76,11 +76,25 @@ const updateModifyArticle = async (req, res) => {
   }
 };
 
+const deleteArticle = async (req, res) => {
+  try {
+    const client = await mongoClient.connect();
+    const board = client.db('kdt5').collection('board');
+
+    await board.deleteOne({ _id: ObjectId(req.params.id) });
+    res.end();
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.massage + UNEXPECTED_MSG);
+  }
+};
+
 module.exports = {
   getAllArticles,
   writeArticle,
   getModifyArticle,
   updateModifyArticle,
+  deleteArticle,
 };
 
 // const boardDB = {
