@@ -1,4 +1,9 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable max-len */
+
+//몽고 _id를 위한 인폴트, 몽고디비에 _id 값은 ObjectId에 넣어서 찾아줘야 찾는다.
+const { ObjectId } = require('mongodb');
+
 const mongoClient = require('./mongoConnect');
 
 const UNEXPECTED_MSG = '<br><a href="/">메인 페이지로 이동</a>';
@@ -22,7 +27,40 @@ const getAllArticles = async (req, res) => {
   }
 };
 
-module.exports = { getAllArticles };
+const writeArticle = async (req, res) => {
+  try {
+    const client = await mongoClient.connect();
+    const board = client.db('kdt5').collection('board');
+
+    const newArticle = {
+      USERID: req.session.userID,
+      TITLE: req.body.title,
+      CONTENT: req.body.content,
+    };
+    await board.insertOne(newArticle);
+    res.redirect('/dbBoard');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.massage + UNEXPECTED_MSG);
+  }
+};
+
+const getModifyArticle = async (req, res) => {
+  try {
+    const client = await mongoClient.connect();
+    const board = client.db('kdt5').collection('board');
+
+    const selectedArticle = await board.findOne({
+      _id: ObjectId(req.params.id),
+    });
+    res.render('db_board_modify', { selectedArticle });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err.massage + UNEXPECTED_MSG);
+  }
+};
+
+module.exports = { getAllArticles, writeArticle, getModifyArticle };
 
 // const boardDB = {
 //   //모든 게시글 가져오기

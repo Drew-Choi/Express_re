@@ -1,6 +1,10 @@
 /* eslint-disable spaced-comment */
 const express = require('express');
-const { getAllArticles } = require('../controllers/boardController');
+const {
+  getAllArticles,
+  writeArticle,
+  getModifyArticle,
+} = require('../controllers/boardController');
 
 const router = express.Router();
 
@@ -18,6 +22,18 @@ function isLogin(req, res, next) {
 
 //게시판 페이지 호출
 router.get('/', isLogin, getAllArticles);
+
+//글쓰기 모드로 이동
+router.get('/write', isLogin, (req, res) => {
+  const { userID } = req.session;
+  res.render('db_board_write', { userID });
+});
+
+//글 등록하기
+router.post('/write', isLogin, writeArticle);
+
+//글수정 모드로 이동
+router.get('/modify/:id', isLogin, getModifyArticle);
 
 //레거시
 // router.get('/', isLogin, (req, res) => {
