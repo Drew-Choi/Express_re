@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 const express = require('express');
 const router = express.Router();
 const userDB = require('../controllers/userController');
@@ -6,12 +7,12 @@ router.get('/', (req, res) => {
   res.render('login');
 });
 
-//로그인 미들웨어
+// 로그인 미들웨어
 router.post('/', (req, res) => {
   userDB.userCheck(req.body.id, (data) => {
     if (data.length === 1) {
       if (data[0].PASSWORD === req.body.password) {
-        //로그인 세션 발행
+        // 로그인 세션 발행
         req.session.login = true;
         req.session.userID = req.body.id;
 
