@@ -158,16 +158,35 @@
     </div>
   </div>
   <script>
-    function deleteArticle (id) {
-      fetch(`http://localhost:4005/dbBoard/delete/${id}`, {
-        method: 'delete',
-        headers: {
-          'Content-type': "application/json",
-        }
-      }).then((res) => {
-        if(res.status === 200) location.reload();
+    //async, await 버젼
+    async function deleteArticle(id) {
+    const res = await fetch(`/dbBoard/delete/${id}`, {
+        method: 'DELETE'
       })
+      console.log(res);
+
+      if(res.status !== 200) return alert("통신 실패")
+      
+      const msg = await res.json();
+      console.log(msg);
+      location.reload();
     }
+
+    // function deleteArticle (id) {
+    //   fetch(`http://localhost:4005/dbBoard/delete/${id}`, {
+    //     method: 'delete',
+    //     headers: {
+    //       'Content-type': "application/json",
+    //     }
+    //   }).then((res) => {
+    //     // if(res.status === 200) location.reload();
+    //     console.log(res);
+    //     return res.json();
+    //   })
+    //     .then ((msg) => {
+    //       console.log(msg);
+    //     })
+    //   }
   </script>
 </body>
 </html>

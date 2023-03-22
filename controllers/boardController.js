@@ -69,7 +69,8 @@ const updateModifyArticle = async (req, res) => {
       { _id: ObjectId(req.params.id) },
       { $set: { TITLE: req.body.title, CONTENT: req.body.content } },
     );
-    res.redirect('/dbBoard');
+
+    res.status(200).redirect('/dbBoard');
   } catch (err) {
     console.error(err);
     res.status(500).send(err.massage + UNEXPECTED_MSG);
@@ -82,7 +83,7 @@ const deleteArticle = async (req, res) => {
     const board = client.db('kdt5').collection('board');
 
     await board.deleteOne({ _id: ObjectId(req.params.id) });
-    res.end();
+    res.status(200).json('삭제성공');
   } catch (err) {
     console.error(err);
     res.status(500).send(err.massage + UNEXPECTED_MSG);
