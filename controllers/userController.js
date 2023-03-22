@@ -63,7 +63,7 @@ const loginUser = async (req, res) => {
       signed: true,
     });
 
-    res.status(200).send('로그인 성공');
+    res.status(200).redirect('/dbBoard');
   } catch (err) {
     console.error(err);
     res.status(500).send(LOGIN_UNEXPECTED_MSG);
