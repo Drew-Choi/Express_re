@@ -1,3 +1,5 @@
+/* eslint-disable spaced-comment */
+/* eslint-disable import/newline-after-import */
 const express = require('express');
 const router = express.Router();
 

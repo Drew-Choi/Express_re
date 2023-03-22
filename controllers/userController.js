@@ -8,6 +8,10 @@ const UNEXPECTED_MSG =
 const DUPLICATED_MSG =
   "동일한 ID를 가진 회원이 존재합니다. <br><a href='/register'>회원가입으로 이동</a>";
 const SUCCESS_MSG = "회원가입 완료! <br><a href='/login'>로그인으로 이동</a>";
+const PASSWORD_MISS =
+  "비밀번호가 틀렸습니다. <br><a href='/login'>다시 로그인하기</a>";
+const ID_MISS =
+  "회원정보가 없습니다. <br><a href='/register'>회원가입으로 이동</a>";
 
 const registerUser = async (req, res) => {
   try {
@@ -30,7 +34,46 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser };
+const loginUser = async (req, res) => {
+  try {
+    //디비서버연결
+    const client = await mongoClient.connect();
+    //디비서버 컬렉션 접근
+    const user = client.db('kdt5').collection('user');
+
+    //폼에서 뿌린 아이디 값을 디비에서 찾기
+    const duplicatedUser = await user.findOne({ id: req.body.id });
+    //아이디 일치하는지 보고
+    if (duplicatedUser) {
+      //데이터 값이 들어오면 트루이니
+      // 그 다음에는 password일치 확인
+      if (duplicatedUser.password === req.body.password) {
+        // 세션생성
+        req.session.login = true;
+        req.session.userID = req.body.id;
+
+        // 로그인 쿠키 발행
+        res.cookie('user', req.body.id, {
+          maxAge: 1000 * 30,
+          httpOnly: true,
+          signed: true,
+        });
+
+        res.status(200);
+        res.send('로그인 성공');
+      } else {
+        return res.status(400).send(PASSWORD_MISS);
+      }
+    } else {
+      return res.status(400).send(ID_MISS);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(UNEXPECTED_MSG);
+  }
+};
+
+module.exports = { registerUser, loginUser };
 
 //라우터와 컨트롤러 분리한 코드
 // const userDB = {

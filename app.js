@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-template */
+/* eslint-disable quotes */
+/* eslint-disable spaced-comment */
 // @ts-check
 
 const express = require('express');

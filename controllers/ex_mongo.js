@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri =
   'mongodb+srv://drc920630:drew1234@cluster0.ikcoamt.mongodb.net/?retryWrites=true&w=majority';

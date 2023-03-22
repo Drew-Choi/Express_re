@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 const express = require('express');
 const boardDB = require('../controllers/boardController');
 
