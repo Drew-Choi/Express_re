@@ -33,6 +33,8 @@ app.use(
 app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+//사진 저장한 폴더 설정 잡아주기
+app.use('/uploads', express.static('uploads'));
 //바디-파서 세팅 (항상 라우터 위에 세팅되어야 함)
 //바디-파서 express 내장되어 있음, express로 사용해도 됨
 app.use(express.json());
