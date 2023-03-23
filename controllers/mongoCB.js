@@ -1,3 +1,7 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/newline-after-import */
+/* eslint-disable spaced-comment */
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri =
   'mongodb+srv://drc920630:drew1234@cluster0.ikcoamt.mongodb.net/?retryWrites=true&w=majority';

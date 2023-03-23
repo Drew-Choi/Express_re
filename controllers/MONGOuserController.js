@@ -2,9 +2,7 @@
 /* eslint-disable spaced-comment */
 
 //라우터와 컨트롤러 합친 코드
-const mongooseConnect = require('./mongooseConnect');
-const User = require('../models/user');
-
+const mongoClient = require('./mongoConnect');
 const UNEXPECTED_MSG =
   "알 수 없는 문제 발생 <br><a href='/register'>회원가입으로 이동</a>";
 const DUPLICATED_MSG =
@@ -20,13 +18,18 @@ const LOGIN_ID_MISS =
 
 const registerUser = async (req, res) => {
   try {
+    //디비서버연결
+    const client = await mongoClient.connect();
+    //디비서버 컬렉션 접근
+    const user = client.db('kdt5').collection('user');
+
     //폼에서 뿌린 아이디 값을 디비에서 찾기
-    const duplicatedUser = await User.findOne({ id: req.body.id });
+    const duplicatedUser = await user.findOne({ id: req.body.id });
     //중복값있는지 확인
     //중복되면 바로 스테이터코드와 메시지 보내기
     if (duplicatedUser) return res.status(400).send(DUPLICATED_MSG);
     //중복이 아니라면 디비에 등록
-    await User.create(req.body);
+    await user.insertOne(req.body);
     res.status(200).send(SUCCESS_MSG);
   } catch (err) {
     console.error(err);
