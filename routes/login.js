@@ -10,6 +10,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', loginUser);
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.clearCookie('user');
+    res.redirect('/');
+  });
+});
+
 // 로그인 미들웨어
 
 //레거시 코드
@@ -42,14 +51,6 @@ router.post('/', loginUser);
 //         '해당 ID가 존재하지 않습니다. <br><a href="/register">회원가입으로 이동</a><br><br><a href="/login">다시 로그인하기</a>',
 //       );
 //     }
-//   });
-// });
-
-// router.get('/logout', (req, res) => {
-//   req.session.destroy((err) => {
-//     if (err) throw err;
-//     res.clearCookie('user');
-//     res.redirect('/');
 //   });
 // });
 
