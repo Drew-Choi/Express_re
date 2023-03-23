@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
   },
 });
 const limits = {
-  fileSize: 1024 * 1024 * 2,
+  fileSize: 1024 * 1024 * 10,
 };
 
 const upload = multer({ storage, limits });
@@ -61,7 +61,7 @@ router.post('/write', isLogin, upload.single('img'), writeArticle);
 router.get('/modify/:id', isLogin, getModifyArticle);
 
 //수정된 글 업데이트
-router.post('/modify/:id', isLogin, updateModifyArticle);
+router.post('/modify/:id', isLogin, upload.single('img'), updateModifyArticle);
 
 //글 삭제
 router.delete('/delete/:id', isLogin, deleteArticle);

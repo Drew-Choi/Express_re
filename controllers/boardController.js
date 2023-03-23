@@ -66,9 +66,23 @@ const updateModifyArticle = async (req, res) => {
     const client = await mongoClient.connect();
     const board = client.db('kdt5').collection('board');
 
+    //이건 임시 저장소임
+    const modifyStorage = {
+      TITLE: req.body.title,
+      CONTENT: req.body.content,
+    };
+
+    //파일이 들어오면 IMAGE키를 임시 객체에 저장하는 방식
+    //파일이 안들어오면 TITLE과 CONTENT만 바꾸고 인설트하는 것
+    if (req.file) modifyStorage.IMAGE = req.file.filename;
+
     await board.updateOne(
       { _id: ObjectId(req.params.id) },
-      { $set: { TITLE: req.body.title, CONTENT: req.body.content } },
+      {
+        $set: {
+          modifyStorage,
+        },
+      },
     );
 
     res.status(200).redirect('/dbBoard');
