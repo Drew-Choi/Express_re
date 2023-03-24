@@ -15,8 +15,12 @@ const {
 
 const router = express.Router();
 
-//파일 업로드 설정
+//파일 업로드 저장하기 설정
+//경로 변수에 담기
 const dir = './uploads';
+//destination은 경로 설정, filename은 파일 저장시 그 파일의 이름 설정
+//스토리지 변수에 내 컴퓨터의 디스크스토리지 사용하겠다고 명령 그리고 콜백으로
+//경로와 파일명 지정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, dir);
@@ -25,12 +29,17 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + '_' + Date.now());
   },
 });
+//파일 크기 제한 1024*1024는 1mb
 const limits = {
   fileSize: 1024 * 1024 * 10,
 };
 
+//위에 설정한 경로와 제한사항을 multer모듈에 넣기
+//upload변수는 아래 라우터에서 사용하여 폼으로 들어오는 파일을 처리해줌
 const upload = multer({ storage, limits });
 
+//existsSync는 파일이 존재하는지 여부, 존재하지 않는다면,
+//mkdirSync를 해주는데, mkdir이 디렉토리를 만드는 것을 의미
 if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 
 //로그인 확인용 미들웨어
